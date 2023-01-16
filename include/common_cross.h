@@ -15,12 +15,10 @@
 	#endif
 #endif
 
-struct CrossWindow{
-	const std::string title;
-	const int width;
-	const int height;
-};
+struct CrossWindow{};
 
 CROSS_NATIVE void something();
 
 CROSS_NATIVE std::string get_active_window_title();
+
+CROSS_NATIVE CrossWindow* get_window_by_title(std::string title);

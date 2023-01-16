@@ -11,3 +11,19 @@ CROSS_NATIVE std::string get_active_window_title(){
 	GetWindowText(handle,(LPSTR)&buff,1024);
 	return std::string(buff);
 }
+
+
+struct CrossWindowWin32Impl:public CrossWindow{
+	HWND window;
+};
+
+
+CROSS_NATIVE CrossWindow* get_window_by_title(std::string title){
+	HWND hwnd=NULL;
+	hwnd=FindWindow(NULL,title.c_str());
+	if (hwnd==NULL)return NULL;
+	
+	CrossWindowWin32Impl* impl=new CrossWindowWin32Impl;
+	impl->window=hwnd;
+	return impl;
+}
